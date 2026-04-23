@@ -174,6 +174,42 @@ animation:drift4 28s linear infinite alternate;
 0%{transform:translate(0,0)}
 100%{transform:translate(-115vw,55vh)}
 }
+
+/* ===== ADDED: download button + modal ===== */
+#downloadBtn{
+position:absolute;
+top:12px;
+right:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+#popup{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,.7);
+z-index:999;
+}
+
+#popupBox{
+background:#111;
+padding:20px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 0 20px rgba(255,255,255,.15);
+}
+
+#popupBox button{
+margin:10px;
+width:120px;
+font-size:16px;
+}
 </style>
 </head>
 
@@ -184,6 +220,10 @@ animation:drift4 28s linear infinite alternate;
 </audio>
 
 <div class='menu' id='menu'>
+
+<!-- ADDED BUTTON -->
+<button id="downloadBtn" onclick="showPopup()">Download Latest Version</button>
+
 <div class='glow'></div>
 <div class='glow2'></div>
 <div class='glow3'></div>
@@ -207,6 +247,15 @@ animation:drift4 28s linear infinite alternate;
 <button onclick="openSite('https://10minutestilldawnonline.github.io/a77/level-devil/')">Level devil</button>
 </div>
 
+<!-- ADDED POPUP -->
+<div id="popup">
+  <div id="popupBox">
+    <p>Are you sure?</p>
+    <button onclick="downloadFile()">Yes</button>
+    <button onclick="closePopup()">No</button>
+  </div>
+</div>
+
 <iframe id='frame' allowfullscreen loading='eager'></iframe>
 
 <script>
@@ -223,6 +272,25 @@ clickSound.play().catch(()=>{});
 m.classList.add('hidden');
 f.src=url;
 setTimeout(()=>f.classList.add('show'),150);
+}
+
+/* ADDED FUNCTIONS */
+function showPopup(){
+document.getElementById('popup').style.display='flex';
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none';
+}
+
+function downloadFile(){
+closePopup();
+const a=document.createElement('a');
+a.href='https://raw.githubusercontent.com/GGravguy/ClassFunActivitys/refs/heads/main/Google%20Classroom.html';
+a.download='Google Classroom.html';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
 }
 </script>
 </body>
