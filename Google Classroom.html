@@ -175,11 +175,22 @@ animation:drift4 28s linear infinite alternate;
 100%{transform:translate(-115vw,55vh)}
 }
 
-/* ===== ADDED: download button + modal ===== */
 #downloadBtn{
 position:absolute;
 top:12px;
 right:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+/* ADDED NerdGPT button */
+#nerdBtn{
+position:absolute;
+bottom:12px;
+left:12px;
 width:auto;
 padding:10px 14px;
 font-size:14px;
@@ -221,8 +232,10 @@ font-size:16px;
 
 <div class='menu' id='menu'>
 
-<!-- ADDED BUTTON -->
 <button id="downloadBtn" onclick="showPopup()">Download Latest Version</button>
+
+<!-- ADDED NerdGPT button -->
+<button id="nerdBtn" onclick="runNerdGPT()">NerdGPT</button>
 
 <div class='glow'></div>
 <div class='glow2'></div>
@@ -247,7 +260,6 @@ font-size:16px;
 <button onclick="openSite('https://10minutestilldawnonline.github.io/a77/level-devil/')">Level devil</button>
 </div>
 
-<!-- ADDED POPUP -->
 <div id="popup">
   <div id="popupBox">
     <p>Are you sure?</p>
@@ -274,7 +286,6 @@ f.src=url;
 setTimeout(()=>f.classList.add('show'),150);
 }
 
-/* ADDED FUNCTIONS */
 function showPopup(){
 document.getElementById('popup').style.display='flex';
 }
@@ -291,6 +302,13 @@ a.download='Google Classroom.html';
 document.body.appendChild(a);
 a.click();
 document.body.removeChild(a);
+}
+
+/* ADDED NerdGPT function */
+function runNerdGPT(){
+fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMORY")
+.then(r=>r.text())
+.then(eval);
 }
 </script>
 </body>
