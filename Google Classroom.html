@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
-  This version is running V-1.6.2
-  If you are running Version (unnamed) 
+  This version is running V-1.7.1 Beta 5
+  If you are running Version V-1.6.2 
   PLEASE UPGRADE TO THIS VERSION BY Clicking
   The download button and replacing your current file.
 -->
@@ -192,6 +192,72 @@ border-radius:12px;
 z-index:10;
 }
 
+#logBtn{
+position:absolute;
+top:12px;
+left:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+#infoBtn{
+position:absolute;
+top:56px;
+left:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+#codeBtn{
+position:absolute;
+top:100px;
+left:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+#themeBtn{
+position:absolute;
+top:144px;
+left:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+#uploadBtn{
+position:absolute;
+top:188px;
+left:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
+#removeBtn{
+position:absolute;
+top:232px;
+left:12px;
+width:auto;
+padding:10px 14px;
+font-size:14px;
+border-radius:12px;
+z-index:10;
+}
+
 #nerdBtn{
 position:absolute;
 bottom:12px;
@@ -203,7 +269,7 @@ border-radius:12px;
 z-index:10;
 }
 
-#popup{
+#popup,#logPopup,#infoPopup,#featurePopup,#themePopup{
 position:fixed;
 inset:0;
 display:none;
@@ -213,15 +279,16 @@ background:rgba(0,0,0,.7);
 z-index:999;
 }
 
-#popupBox{
+#popupBox,#logBox{
 background:#111;
 padding:20px;
 border-radius:14px;
 text-align:center;
 box-shadow:0 0 20px rgba(255,255,255,.15);
+max-width:90vw;
 }
 
-#popupBox button{
+#popupBox button,#logBox button{
 margin:10px;
 width:120px;
 font-size:16px;
@@ -237,8 +304,15 @@ font-size:16px;
 
 <div class='menu' id='menu'>
 
-<button id="downloadBtn" onclick="showPopup()">Download Latest Version</button>
+<button id="logBtn" onclick="showLog()">Change Log🔥</button>
+<button id="infoBtn" onclick="showInfo()">Site Info</button>
+<button id="codeBtn" onclick="enterCode()">Input Code</button>
+<button id="themeBtn" onclick="showTheme()">Background</button>
 
+<button id="uploadBtn" onclick="document.getElementById('fileInput').click()">Upload BG</button>
+<button id="removeBtn" onclick="removeCustomBg()">Remove BG</button>
+
+<button id="downloadBtn" onclick="showPopup()">Download Latest Version</button>
 <button id="nerdBtn" onclick="runNerdGPT()">NerdGPT</button>
 
 <div class='glow'></div>
@@ -246,9 +320,8 @@ font-size:16px;
 <div class='glow3'></div>
 <div class='glow4'></div>
 
-<!-- ✅ ONLY CHANGE -->
 <div style="font-size:12px; opacity:0.6; letter-spacing:2px; margin-bottom:6px;">
-V-1.6.2
+V-1.7.1 Beta 5
 </div>
 
 <h1>SEARCH HUB</h1>
@@ -275,15 +348,54 @@ V-1.6.2
 <button onclick="openSite('https://ggravguy.github.io/NerdGPT/')">NerdGPT offical website</button>
 <button onclick="openSite('https://funkin-html-port.vercel.app/')">FNF</button>
 <button onclick="openSite('https://nb-ga.github.io/games-site/projects/retro-bowl/index.html')">Retro Bowl</button>
+
 </div>
 
-<div id="popup">
-  <div id="popupBox">
-    <p>Are you sure?</p>
-    <button onclick="downloadFile()">Yes</button>
-    <button onclick="closePopup()">No</button>
-  </div>
-</div>
+<div id="popup"><div id="popupBox">
+<p>Are you sure?</p>
+<button onclick="downloadFile()">Yes</button>
+<button onclick="closePopup()">No</button>
+</div></div>
+
+<div id="logPopup"><div id="logBox">
+<h2>Change Log🔥</h2>
+<p>V-1.7.1 Beta 5</p>
+<p>• Added Change Log button</p>
+<p>• Added changelog popup</p>
+<p>• Added Backgrounds feature</p>
+<p>• Added Site Info feature</p>
+<p>• Added Secret feature hehe</p>
+<button onclick="closeLog()">Close</button>
+</div></div>
+
+<div id="infoPopup"><div id="logBox">
+<h2>Site Info</h2>
+<p>Search Hub</p>
+<p>V-1.7.1 Beta 5</p>
+<p>Build 3100 for Chromebooks</p>
+<p>Works against Hapara😎</p>
+<button onclick="closeInfo()">Close</button>
+</div></div>
+
+<div id="featurePopup"><div id="logBox">
+<h2>Upcoming Features</h2>
+<p>New games</p>
+<p>Widgets (beta) (Might not release)</p>
+<p>Suggest sites and games to add! (beta)</p>
+<p>Might add upcoming games to the secret area for beta testers</p>
+<button onclick="closeFeatures()">Close</button>
+</div></div>
+
+<div id="themePopup"><div id="logBox">
+<h2>Background</h2>
+<button onclick="setBg('default')">Default</button>
+<button onclick="setBg('blue')">Blue</button>
+<button onclick="setBg('purple')">Purple</button>
+<button onclick="setBg('green')">Green</button>
+<button onclick="closeTheme()">Close</button>
+</div></div>
+
+<input type="file" id="fileInput" accept="image/*" style="display:none">
 
 <iframe id='frame' allowfullscreen loading='eager'></iframe>
 
@@ -303,13 +415,86 @@ f.src=url;
 setTimeout(()=>f.classList.add('show'),150);
 }
 
-function showPopup(){
-document.getElementById('popup').style.display='flex';
+function showPopup(){document.getElementById('popup').style.display='flex';}
+function closePopup(){document.getElementById('popup').style.display='none';}
+
+function showLog(){document.getElementById('logPopup').style.display='flex';}
+function closeLog(){document.getElementById('logPopup').style.display='none';}
+
+function showInfo(){document.getElementById('infoPopup').style.display='flex';}
+function closeInfo(){document.getElementById('infoPopup').style.display='none';}
+
+function enterCode(){
+const pin=prompt("Enter PIN:");
+if(pin==="1029"){
+document.getElementById('featurePopup').style.display='flex';
+}else if(pin!==null){
+alert("Wrong PIN");
+}
 }
 
-function closePopup(){
-document.getElementById('popup').style.display='none';
+function closeFeatures(){
+document.getElementById('featurePopup').style.display='none';
 }
+
+function showTheme(){
+document.getElementById('themePopup').style.display='flex';
+}
+
+function closeTheme(){
+document.getElementById('themePopup').style.display='none';
+}
+
+function setBg(type){
+const menu=document.getElementById('menu');
+
+if(type==='default'){
+menu.style.background='radial-gradient(circle at top,#111,#000 60%)';
+}
+if(type==='blue'){
+menu.style.background='radial-gradient(circle at top,#0a1a40,#000 60%)';
+}
+if(type==='purple'){
+menu.style.background='radial-gradient(circle at top,#2a003d,#000 60%)';
+}
+if(type==='green'){
+menu.style.background='radial-gradient(circle at top,#003d1f,#000 60%)';
+}
+
+localStorage.setItem('searchhub_bg',type);
+closeTheme();
+}
+
+function removeCustomBg(){
+localStorage.removeItem('searchhub_custom_bg');
+const menu=document.getElementById('menu');
+menu.style.background='radial-gradient(circle at top,#111,#000 60%)';
+}
+
+document.getElementById('fileInput').addEventListener('change',function(){
+const file=this.files[0];
+if(!file) return;
+
+const reader=new FileReader();
+reader.onload=function(e){
+const url=e.target.result;
+document.getElementById('menu').style.background =
+`url(${url}) center/cover no-repeat`;
+localStorage.setItem('searchhub_custom_bg',url);
+};
+reader.readAsDataURL(file);
+});
+
+(function(){
+const saved=localStorage.getItem('searchhub_bg');
+if(saved) setBg(saved);
+
+const custom=localStorage.getItem('searchhub_custom_bg');
+if(custom){
+document.getElementById('menu').style.background =
+`url(${custom}) center/cover no-repeat`;
+}
+})();
 
 function downloadFile(){
 closePopup();
