@@ -78,9 +78,26 @@ header h1{
   animation:rainbow 6s linear infinite;
 }
 
-@keyframes rainbow{
-  0%{background-position:0%}
-  100%{background-position:400%}
+/* Space between title and dev notes button */
+.title-space {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* DEV NOTES BUTTON */
+.dev-notes-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(145deg,#1f1f1f,#090909);
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.dev-notes-btn:hover {
+  transform: scale(1.04);
 }
 
 /* GRID */
@@ -172,6 +189,11 @@ header h1{
 <h1>SEARCH HUB</h1>
 </header>
 
+<!-- Space with Dev Notes Button -->
+<div class="title-space">
+  <button class="dev-notes-btn" onclick="askPassword()">Dev Notes</button>
+</div>
+
 <div class="widget-grid" id="widgetGrid">
 
   <!-- GOOGLE -->
@@ -247,6 +269,16 @@ header h1{
 <script>
 function openSite(url){
   window.open(url,"_blank");
+}
+
+function askPassword() {
+  const password = prompt("Enter password:");
+  if(password === "1029") {
+    alert("Access granted! Here are the dev notes...");
+    // Add your dev notes display logic here
+  } else {
+    alert("Incorrect password");
+  }
 }
 </script>
 
