@@ -159,12 +159,6 @@ header h1{
 .widget button:hover{
   transform:scale(1.04);
 }
-
-
-
-.add-widget:hover{
-  background:#00cc77;
-}
 </style>
 </head>
 
@@ -177,7 +171,6 @@ header h1{
 <header>
 <h1>SEARCH HUB</h1>
 </header>
-
 
 <div class="widget-grid" id="widgetGrid">
 
@@ -255,78 +248,6 @@ header h1{
 function openSite(url){
   window.open(url,"_blank");
 }
-
-/* ADD CUSTOM WIDGET */
-function addWidget(){
-
-  const title =
-  prompt("Widget Name:");
-
-  if(!title) return;
-
-  const image =
-  prompt("Image URL:");
-
-  if(!image) return;
-
-  const url =
-  prompt("Website URL:");
-
-  if(!url) return;
-
-  const desc =
-  prompt("Description:");
-
-  const widget = document.createElement("div");
-  widget.className = "widget";
-
-  widget.innerHTML = `
-    <img src="${image}">
-    <div class="widget-content">
-
-      <div class="widget-title">
-        ${title}
-      </div>
-
-      <div class="widget-desc">
-        ${desc || "Custom widget"}
-      </div>
-
-      <button onclick="openSite('${url}')">
-        Open
-      </button>
-
-    </div>
-  `;
-
-  document
-    .getElementById("widgetGrid")
-    .appendChild(widget);
-
-  saveWidgets();
-}
-
-/* SAVE WIDGETS */
-function saveWidgets(){
-
-  localStorage.setItem(
-    "widgetData",
-    document.getElementById("widgetGrid").innerHTML
-  );
-}
-
-/* LOAD SAVED WIDGETS */
-window.onload = () => {
-
-  const saved =
-  localStorage.getItem("widgetData");
-
-  if(saved){
-    document.getElementById(
-      "widgetGrid"
-    ).innerHTML = saved;
-  }
-};
 </script>
 
 </body>
