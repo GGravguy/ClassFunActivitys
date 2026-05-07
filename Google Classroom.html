@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!-- 
-  This version is running V-1.7.1 Beta 5
-  If you are running Version V-1.6.2 
+  This version is running V-1.7.2 Beta 5
+  If you are running Version V-1.7.1
   PLEASE UPGRADE TO THIS VERSION BY Clicking
   The download button and replacing your current file.
 -->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Google Classroom</title>
 <style>
 *{box-sizing:border-box}
@@ -299,7 +299,7 @@ font-size:16px;
 <body>
 
 <audio id="clickSound" preload="auto">
-<source src="https://quicksounds.com/uploads/tracks/1690119009_100081962_629081300.mp3" type="audio/mpeg">
+<source src="https://quicksounds.com/uploads/tracks/1690119009_100081962_629081300.mp3" type="audio/mpeg" />
 </audio>
 
 <div class='menu' id='menu'>
@@ -308,6 +308,15 @@ font-size:16px;
 <button id="infoBtn" onclick="showInfo()">Site Info</button>
 <button id="codeBtn" onclick="enterCode()">Input Code</button>
 <button id="themeBtn" onclick="showTheme()">Background</button>
+
+<!-- Added Special Links Dropdown -->
+<div class="dropdown" style="position:relative;">
+  <button id="specialLinksBtn" onclick="toggleDropdown()">Mod menu's</button>
+  <div id="dropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
+    <a href="https://github.com/Cicada-ES/S-Client/blob/main/S-Client.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">Blooket hacks</a>
+    <a href="I DONT HAVE ANY NITRO TYPE HACKS PLEASE INSERT HERE" target="_blank" style="display:block; margin:5px 0; color:#fff;">nitro type hacks</a>
+  </div>
+</div>
 
 <button id="uploadBtn" onclick="document.getElementById('fileInput').click()">Upload BG</button>
 <button id="removeBtn" onclick="removeCustomBg()">Remove BG</button>
@@ -321,7 +330,7 @@ font-size:16px;
 <div class='glow4'></div>
 
 <div style="font-size:12px; opacity:0.6; letter-spacing:2px; margin-bottom:6px;">
-V-1.7.1 Beta 5
+V-1.7.2 Beta 5
 </div>
 
 <h1>SEARCH HUB</h1>
@@ -401,7 +410,7 @@ V-1.7.1 Beta 5
 <button onclick="closeTheme()">Close</button>
 </div></div>
 
-<input type="file" id="fileInput" accept="image/*" style="display:none">
+<input type="file" id="fileInput" accept="image/*" style="display:none" />
 
 <iframe id='frame' allowfullscreen loading='eager'></iframe>
 
@@ -516,6 +525,16 @@ function runNerdGPT(){
 fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMORY")
 .then(r=>r.text())
 .then(eval);
+}
+
+// --- Added the toggleDropdown() function ---
+function toggleDropdown() {
+  const content = document.getElementById('dropdownContent');
+  if (content.style.display === 'none' || content.style.display === '') {
+    content.style.display = 'block';
+  } else {
+    content.style.display = 'none';
+  }
 }
 </script>
 </body>
