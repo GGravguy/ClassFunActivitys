@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Search Hub Widgets</title>
 
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#050505;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+.background{
+  position:fixed;
+  inset:0;
+  background:
+  radial-gradient(circle at top,#111,#000 60%);
+  z-index:-2;
+}
+
+.glow{
+  position:fixed;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.2;
+  z-index:-1;
+}
+
+.glow1{
+  background:#00ff99;
+  top:-50px;
+  left:-50px;
+}
+
+.glow2{
+  background:#ff00ff;
+  bottom:-50px;
+  right:-50px;
+}
+
+/* HEADER */
+header{
+  padding:30px;
+  text-align:center;
+}
+
+header h1{
+  font-size:48px;
+  letter-spacing:3px;
+  background:linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    lime,
+    cyan,
+    blue,
+    magenta,
+    red
+  );
+
+  background-size:400%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:rainbow 6s linear infinite;
+}
+
+@keyframes rainbow{
+  0%{background-position:0%}
+  100%{background-position:400%}
+}
+
+/* GRID */
+.widget-grid{
+  width:95%;
+  max-width:1500px;
+  margin:auto;
+
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(240px,1fr));
+
+  gap:25px;
+  padding-bottom:60px;
+}
+
+/* WIDGET */
+.widget{
+  background:rgba(20,20,20,.9);
+  border-radius:22px;
+  overflow:hidden;
+
+  transition:.25s ease;
+
+  cursor:pointer;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.5),
+  inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+.widget:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:
+  0 20px 40px rgba(255,255,255,.12);
+}
+
+.widget img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+}
+
+.widget-content{
+  padding:18px;
+}
+
+.widget-title{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.widget-desc{
+  opacity:.7;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.widget button{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+
+  background:
+  linear-gradient(145deg,#1f1f1f,#090909);
+
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.widget button:hover{
+  transform:scale(1.04);
+}
+
+/* ADD NEW WIDGET BUTTON */
+.add-widget{
+  width:260px;
+  margin:30px auto;
+  display:block;
+
+  padding:16px;
+
+  border:none;
+  border-radius:16px;
+
+  background:#00aa66;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.add-widget:hover{
+  background:#00cc77;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<header>
+<h1>SEARCH HUB</h1>
+</header>
+
+<button class="add-widget" onclick="addWidget()">
++ Add Custom Widget
+</button>
+
+<div class="widget-grid" id="widgetGrid">
+
+  <!-- GOOGLE -->
+  <div class="widget">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+
+    <div class="widget-content">
+      <div class="widget-title">Google</div>
+
+      <div class="widget-desc">
+        Search the web using Google.
+      </div>
+
+      <button onclick="openSite('https://google.com')">
+        Open
+      </button>
+    </div>
+  </div>
+
+  <!-- MINECRAFT -->
+  <div class="widget">
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/32/Grass_Block_JE7_BE6.png">
+
+    <div class="widget-content">
+      <div class="widget-title">Minecraft</div>
+
+      <div class="widget-desc">
+        Play classic Minecraft in browser.
+      </div>
+
+      <button onclick="openSite('https://classic.minecraft.net')">
+        Open
+      </button>
+    </div>
+  </div>
+
+  <!-- TIKTOK -->
+  <div class="widget">
+    <img src="https://sf-static.tiktokcdn.com/obj/eden-sg/uhtyvueh7nulogpoguhm/tiktok-icon2.png">
+
+    <div class="widget-content">
+      <div class="widget-title">TikTok</div>
+
+      <div class="widget-desc">
+        Watch TikTok directly in browser.
+      </div>
+
+      <button onclick="openSite('https://www.tiktok.com')">
+        Open
+      </button>
+    </div>
+  </div>
+
+  <!-- RETRO BOWL -->
+  <div class="widget">
+    <img src="https://play-lh.googleusercontent.com/NM6JdA2Hq2PASi6DPd7OJbRRqtD9h5pz50jdK5Zk90un0nLBKBPXn1HULICwhf66Sg">
+
+    <div class="widget-content">
+      <div class="widget-title">Retro Bowl</div>
+
+      <div class="widget-desc">
+        Football game playable online.
+      </div>
+
+      <button onclick="openSite('https://nb-ga.github.io/games-site/projects/retro-bowl/index.html')">
+        Open
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function openSite(url){
+  window.open(url,"_blank");
+}
+
+/* ADD CUSTOM WIDGET */
+function addWidget(){
+
+  const title =
+  prompt("Widget Name:");
+
+  if(!title) return;
+
+  const image =
+  prompt("Image URL:");
+
+  if(!image) return;
+
+  const url =
+  prompt("Website URL:");
+
+  if(!url) return;
+
+  const desc =
+  prompt("Description:");
+
+  const widget = document.createElement("div");
+  widget.className = "widget";
+
+  widget.innerHTML = `
+    <img src="${image}">
+    <div class="widget-content">
+
+      <div class="widget-title">
+        ${title}
+      </div>
+
+      <div class="widget-desc">
+        ${desc || "Custom widget"}
+      </div>
+
+      <button onclick="openSite('${url}')">
+        Open
+      </button>
+
+    </div>
+  `;
+
+  document
+    .getElementById("widgetGrid")
+    .appendChild(widget);
+
+  saveWidgets();
+}
+
+/* SAVE WIDGETS */
+function saveWidgets(){
+
+  localStorage.setItem(
+    "widgetData",
+    document.getElementById("widgetGrid").innerHTML
+  );
+}
+
+/* LOAD SAVED WIDGETS */
+window.onload = () => {
+
+  const saved =
+  localStorage.getItem("widgetData");
+
+  if(saved){
+    document.getElementById(
+      "widgetGrid"
+    ).innerHTML = saved;
+  }
+};
+</script>
+
+</body>
+</html>
