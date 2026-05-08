@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- 
   This version is running V-1.7.2 Beta 5
-  If you are running Version V-1.7.1
+  If you are running Version V-1.7.1 or V-1.6.2
   PLEASE UPGRADE TO THIS VERSION BY Clicking
   The download button and replacing your current file.
 -->
@@ -105,22 +105,6 @@ overflow:hidden;
 
 .show{opacity:1}
 
-/* Hide the menu by default */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Show the menu when the user hovers over the container */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-
-  
 .glow{
 pointer-events:none;
 position:absolute;
@@ -330,10 +314,21 @@ font-size:16px;
   <button id="specialLinksBtn" onclick="toggleDropdown()">Mod menu's</button>
   <div id="dropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
     <a href="https://github.com/Cicada-ES/S-Client/blob/main/S-Client.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">Blooket hacks</a>
-    <a href="I DONT HAVE ANY NITRO TYPE HACKS PLEASE INSERT HERE" target="_blank" style="display:block; margin:5px 0; color:#fff;">nitro type hacks</a>
+    <a href="https://github.com/rxzyx/GimKit-Hacks/blob/main/Classic/Get%20Cash.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">GimKit hacks</a>
   </div>
 </div>
 
+<!-- Add this inside your <div class='menu' id='menu'>, for example after the existing special links dropdown -->
+<div class="dropdown" style="position:relative;">
+  <button id="browserDropdownBtn" onclick="toggleBrowserDropdown()">Browsers</button>
+  <div id="browserDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
+    <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_blank" style="display:block; margin:5px 0; color:#fff;">Fern</a>
+    <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_blank" style="display:block; margin:5px 0; color:#fff;">Google</a>
+  </div>
+</div>
+
+
+  
 <button id="uploadBtn" onclick="document.getElementById('fileInput').click()">Upload BG</button>
 <button id="removeBtn" onclick="removeCustomBg()">Remove BG</button>
 
@@ -389,20 +384,19 @@ V-1.7.2 Beta 5
 
 <div id="logPopup"><div id="logBox">
 <h2>Change Log🔥</h2>
-<p>V-1.7.1 Beta 5</p>
-<p>• Added Change Log button</p>
+<p>V-1.7.2 Beta 5</p>
+<p>•Added Hack Mod Menu</p>
 <p>• Added changelog popup</p>
 <p>• Added Backgrounds feature</p>
 <p>• Added Site Info feature</p>
 <p>• Added Secret feature hehe</p>
-<p>• Added Fern and AWP</p>
 <button onclick="closeLog()">Close</button>
 </div></div>
 
 <div id="infoPopup"><div id="logBox">
 <h2>Site Info</h2>
 <p>Search Hub</p>
-<p>V-1.7.1 Beta 5</p>
+<p>V-1.7.2 Beta 5</p>
 <p>Build 3100 for Chromebooks</p>
 <p>Works against Hapara😎</p>
 <button onclick="closeInfo()">Close</button>
@@ -460,7 +454,7 @@ const pin=prompt("Enter PIN:");
 if(pin==="1029"){
 document.getElementById('featurePopup').style.display='flex';
 }else if(pin!==null){
-alert("Wrong PIN");
+alert("ඞWrong PINඞ");
 }
 }
 
@@ -552,6 +546,22 @@ function toggleDropdown() {
     content.style.display = 'none';
   }
 }
+
+
+function toggleBrowserDropdown() {
+  const content = document.getElementById('browserDropdownContent');
+  if (content.style.display === 'none' || content.style.display === '') {
+    content.style.display = 'block';
+  } else {
+    content.style.display = 'none';
+  }
+}
+
+
+
+
+
+  
 </script>
 </body>
 </html>
