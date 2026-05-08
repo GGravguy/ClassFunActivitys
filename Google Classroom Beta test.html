@@ -318,17 +318,15 @@ font-size:16px;
   </div>
 </div>
 
-<!-- Add this inside your <div class='menu' id='menu'>, for example after the existing special links dropdown -->
+<!-- New Browsers dropdown added here -->
 <div class="dropdown" style="position:relative;">
-  <button id="browserDropdownBtn" onclick="toggleBrowserDropdown()">Browsers</button>
-  <div id="browserDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
+  <button id="browsersBtn" onclick="toggleBrowsersDropdown()">Browsers</button>
+  <div id="browsersDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
     <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_blank" style="display:block; margin:5px 0; color:#fff;">Fern</a>
     <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_blank" style="display:block; margin:5px 0; color:#fff;">Google</a>
   </div>
 </div>
 
-
-  
 <button id="uploadBtn" onclick="document.getElementById('fileInput').click()">Upload BG</button>
 <button id="removeBtn" onclick="removeCustomBg()">Remove BG</button>
 
@@ -540,28 +538,37 @@ fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMO
 // --- Added the toggleDropdown() function ---
 function toggleDropdown() {
   const content = document.getElementById('dropdownContent');
-  if (content.style.display === 'none' || content.style.display === '') {
-    content.style.display = 'block';
+  if (content.style.opacity==='1' || content.style.display==='block') {
+    content.style.opacity='0';
+    content.style.display='none';
   } else {
-    content.style.display = 'none';
+    content.style.opacity='1';
+    content.style.display='block';
   }
 }
 
-
-function toggleBrowserDropdown() {
-  const content = document.getElementById('browserDropdownContent');
-  if (content.style.display === 'none' || content.style.display === '') {
-    content.style.display = 'block';
+// --- Added the toggleBrowsersDropdown() function ---
+function toggleBrowsersDropdown() {
+  const content = document.getElementById('browsersDropdownContent');
+  if (content.style.display==='block') {
+    content.style.display='none';
   } else {
-    content.style.display = 'none';
+    content.style.display='block';
   }
 }
 
-
-
-
-
-  
+// Optional: Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+  const dropdowns = ['dropdownContent', 'browsersDropdownContent'];
+  dropdowns.forEach(function(id) {
+    const el = document.getElementById(id);
+    const btnId = id==='dropdownContent' ? 'specialLinksBtn' : 'browsersBtn';
+    const btn = document.getElementById(btnId);
+    if (el && !el.contains(event.target) && !btn.contains(event.target)) {
+      el.style.display='none';
+    }
+  });
+});
 </script>
 </body>
 </html>
