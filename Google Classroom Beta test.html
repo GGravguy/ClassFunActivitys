@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Google Classroom with Chat</title>
+<title>Google Classroom</title>
 <style>
 *{box-sizing:border-box}
 html,body{
@@ -21,11 +21,6 @@ font-family:Arial,sans-serif;
 background:#000;
 color:#fff;
 }
-/* Embedded Browsers Bar Styles */
-#embeddedBrowsers {
-  position: fixed; top: 0; left: 0; width: 100%; background: #222; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; z-index: 1000;
-}
-/* Existing styles... */
 body{
 display:flex;
 align-items:center;
@@ -98,7 +93,6 @@ transition:opacity .7s ease;
 overflow:hidden;
 }
 .show{opacity:1}
-/* Glow effects... same as before... */
 .glow{
 pointer-events:none;
 position:absolute;
@@ -277,74 +271,56 @@ font-size:16px;
 <source src="https://quicksounds.com/uploads/tracks/1690119009_100081962_629081300.mp3" type="audio/mpeg" />
 </audio>
 
-<!-- Embedded Browsers Bar at Top -->
-<div id="embeddedBrowsers">
-  <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_self" style="color:#fff;">Fern</a>
-  <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_self" style="color:#fff;">Google</a>
-  <a href="https://www.bing.com" target="_self" style="color:#fff;">Bing</a>
-  <a href="https://duckduckgo.com" target="_self" style="color:#fff;">DuckDuckGo</a>
-  <a href="https://yandex.com" target="_self" style="color:#fff;">Yandex</a>
-  <a href="https://search.brave.com" target="_self" style="color:#fff;">Brave</a>
-</div>
-
+<!-- Existing menu -->
 <div class='menu' id='menu'>
 
+<!-- Your existing buttons... -->
 <button id="logBtn" onclick="showLog()">Change Log🔥</button>
 <button id="infoBtn" onclick="showInfo()">Site Info</button>
 <button id="codeBtn" onclick="enterCode()">Input Code</button>
 <button id="themeBtn" onclick="showTheme()">Background</button>
 
-<!-- Removed old Browser dropdown button and menu -->
+<!-- Added: Button to embed chat -->
+<button onclick="embedChat()">Embed Chat</button>
 
-<!-- Other existing buttons -->
+<!-- Existing dropdowns and buttons... -->
+<div class="dropdown" style="position:relative;">
+  <button id="specialLinksBtn" onclick="toggleDropdown()">Mod menu's</button>
+  <div id="dropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
+    <a href="https://github.com/Cicada-ES/S-Client/blob/main/S-Client.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">Blooket hacks</a>
+    <a href="https://github.com/rxzyx/GimKit-Hacks/blob/main/Classic/Get%20Cash.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">GimKit hacks</a>
+  </div>
+</div>
+
+<div class="dropdown" style="position:relative;">
+  <button id="browsersBtn" onclick="toggleBrowsersDropdown()">Browsers</button>
+  <div id="browsersDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
+    <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_blank" style="display:block; margin:5px 0; color:#fff;">Fern</a>
+    <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_blank" style="display:block; margin:5px 0; color:#fff;">Google</a>
+    <a href="https://www.bing.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Bing</a>
+    <a href="https://duckduckgo.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">DuckDuckGo</a>
+    <a href="https://yandex.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Yandex</a>
+    <a href="https://search.brave.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Brave</a>
+    <a href="https://firefox.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Firefox</a>
+    <a href="https://edge.microsoft.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Edge</a>
+  </div>
+</div>
+
+<!-- Your existing buttons for upload, remove, etc. -->
 <button id="uploadBtn" onclick="document.getElementById('fileInput').click()">Upload BG</button>
 <button id="removeBtn" onclick="removeCustomBg()">Remove BG</button>
-
 <button id="downloadBtn" onclick="showPopup()">Download Latest Version</button>
 <button id="nerdBtn" onclick="runNerdGPT()">NerdGPT</button>
 
-<div class='glow'></div>
-<div class='glow2'></div>
-<div class='glow3'></div>
-<div class='glow4'></div>
-
-<div style="font-size:12px; opacity:0.6; letter-spacing:2px; margin-bottom:6px;">
-V-1.7.3 Beta 5
-</div>
+<!-- Existing glowing effects... -->
 
 <h1>SEARCH HUB</h1>
-
-<!-- Existing buttons for site links -->
+<!-- Your existing site buttons... -->
 <button onclick="openSite('https://forms.gle/sBZQXPX7TByj86bk6')">Want To Suggest Something? Click Here!</button>
-<button onclick="openSite('https://rammer-nana.govt.hu')">Unblocked Browser</button>
-<button onclick="openSite('https://www.google.com/?igu=1&safe=active&ssui=on')">Google</button>
-<button onclick="openSite('https://www.google.com/search?q=&udm=50&igu=1&safe=active&ssui=on')">Google AI Mode</button>
-<button onclick="openSite('https://www.bing.com/copilotsearch?q=')">Copilot</button>
-<button onclick="openSite('https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D')">Watch TikTok 🔥</button>
-<button onclick="openSite('https://gamenora.com/')">Gamenora</button>
-<button onclick="openSite('https://d11jzht7mj96rr.cloudfront.net')">Totally Science</button>
-<button onclick="openSite('https://www.autistici.org/burnedprojects/UNDERTALE/')">UNDERTALE</button>
-<button onclick="openSite('https://gamecollections.me/game/owner/geometry-dash-lite/')">Geo Dash</button>
-<button onclick="openSite('https://ggravguy.github.io/EmbedLand/')">Embed Land</button>
-<button onclick="openSite('https://d1tmbzjih4bfq6.cloudfront.net/')">Completely Science</button>
-<button onclick="openSite('https://voicy.network')">Sound Board</button>
-<button onclick="openSite('https://classic.minecraft.net')">Classic Minecraft</button>
-<button onclick="openSite('https://www.andrew.cmu.edu/course/16-726-sp24/projects/rchoudhu/proj0/')">Hacker Typer</button>
-<button onclick="openSite('https://greggman.com/downloads/examples/html5bytebeat/html5bytebeat.html')">HTML5 Bytebeat</button>
-<button onclick="openSite('https://musiclab.chromeexperiments.com/')">Chrome Music Lab</button>
-<button onclick="openSite('https://10minutestilldawnonline.github.io/a77/level-devil/')">Level devil</button>
-<button onclick="openSite('https://29a.ch/')">29A.ch</button>
-<button onclick="openSite('https://screenprank.com/')">Screen Prank</button>
-<button onclick="openSite('https://geekprank.com/')">Geek Prank</button>
-<button onclick="openSite('https://ggravguy.github.io/CINEMA/')">CINEMA (YouTube)</button>
-<button onclick="openSite('https://ggravguy.github.io/NerdGPT/')">NerdGPT offical website</button>
-<button onclick="openSite('https://funkin-html-port.vercel.app/')">FNF</button>
-<button onclick="openSite('https://nb-ga.github.io/games-site/projects/retro-bowl/index.html')">Retro Bowl</button>
-<button onclick="openSite('https://s3.amazonaws.com/bullguardian/index.html')">Fern</button>
+<!-- ... all your other site buttons ... -->
 
-</div>
+<!-- Popup modals... -->
 
-<!-- Popup dialogs -->
 <div id="popup"><div id="popupBox">
 <p>Are you sure?</p>
 <button onclick="downloadFile()">Yes</button>
@@ -391,10 +367,19 @@ V-1.7.3 Beta 5
 
 <iframe id='frame' allowfullscreen loading='eager'></iframe>
 
-<!-- Chat system added at the bottom -->
+<!-- Your existing script -->
+<script>
+// Your existing scripts...
+// (Leave everything as it is above, then add the following function at the very end)
+
+function embedChat() {
+  // Create the chat embed HTML
+  const chatDiv = document.createElement('div');
+  chatDiv.innerHTML = `
+<!-- Chat System -->
 <div style="position:fixed; bottom:0; left:0; width:100%; background:#222; padding:10px; display:flex; flex-direction:column; z-index:2000;">
   <div id="chatContainer" style="max-height:200px; overflow-y:auto; background:#111; padding:5px; margin-bottom:5px;">
-    <!-- Chat messages appear here -->
+    <!-- Chat messages will appear here -->
   </div>
   <div style="display:flex;">
     <input type="text" id="chatInput" style="flex:1; padding:8px; border-radius:4px; border:none;" placeholder="Type a message"/>
@@ -402,109 +387,64 @@ V-1.7.3 Beta 5
     <button onclick="downloadChat()" style="margin-left:5px; padding:8px 12px; border:none; border-radius:4px;">Download Chat</button>
   </div>
 </div>
-
 <script>
-const clickSound=document.getElementById('clickSound');
-clickSound.volume=0.5;
+  // Chat script
+  let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+  let username = localStorage.getItem('chatUsername') || '';
 
-let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-let username=localStorage.getItem('chatUsername') || '';
-
-function updateChatDisplay() {
-  const container=document.getElementById('chatContainer');
-  container.innerHTML='';
-  chatMessages.forEach(msg => {
-    container.innerHTML += `<div><strong>${msg.name}:</strong> ${msg.text}</div>`;
-  });
-  container.scrollTop=container.scrollHeight;
-}
-
-function sendChat() {
-  const input=document.getElementById('chatInput');
-  const message=input.value.trim();
-  if(!message) return;
-  if(!username) {
-    alert('Please set your username first.');
-    return;
+  function updateChatDisplay() {
+    const container = document.getElementById('chatContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    chatMessages.forEach(msg => {
+      container.innerHTML += \`<div><strong>\${msg.name}:</strong> \${msg.text}</div>\`;
+    });
+    container.scrollTop=container.scrollHeight;
   }
-  chatMessages.push({name:username, text:message});
-  localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
-  updateChatDisplay();
-  input.value='';
-}
 
-function downloadChat() {
-  const data=chatMessages.map(m=>`${m.name}: ${m.text}`).join('\n');
-  const blob=new Blob([data], {type:'text/plain'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='chat.txt';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function setUsername() {
-  const name=prompt('Enter your username:');
-  if(name) {
-    username=name.trim();
-    localStorage.setItem('chatUsername',username);
-    alert('Username set to: '+username);
+  window.sendChat = function() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message || !username) return;
+    chatMessages.push({name: username, text: message});
+    localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+    updateChatDisplay();
+    input.value='';
   }
+
+  window.downloadChat = function() {
+    const data=chatMessages.map(m=>\`\${m.name}: \${m.text}\`).join('\\n');
+    const blob=new Blob([data], {type:'text/plain'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='chat.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  window.setUsername = function() {
+    const name=prompt('Enter your username:');
+    if(name) {
+      username=name.trim();
+      localStorage.setItem('chatUsername',username);
+      alert('Username set to: '+username);
+    }
+  }
+
+  // Prompt for username if not set
+  if (!username) {
+    setTimeout(() => {
+      alert('Please set your username.');
+      window.setUsername();
+    }, 100);
+  } else {
+    updateChatDisplay();
+  }
+</script>
+`;
+  document.body.appendChild(chatDiv);
 }
-
-// Initialize chat display and username
-updateChatDisplay();
-if(!username) {
-  setUsername();
-}
-
-const clickSound=document.getElementById('clickSound');
-clickSound.volume=0.5;
-
-function openSite(url){
-const m=document.getElementById('menu');
-const f=document.getElementById('frame');
-
-clickSound.currentTime=0;
-clickSound.play().catch(()=>{});
-
-m.classList.add('hidden');
-f.src=url;
-setTimeout(()=>f.classList.add('show'),150);
-}
-
-function showPopup(){document.getElementById('popup').style.display='flex';}
-function closePopup(){document.getElementById('popup').style.display='none';}
-function showLog(){document.getElementById('logPopup').style.display='flex';}
-function closeLog(){document.getElementById('logPopup').style.display='none';}
-function showInfo(){document.getElementById('infoPopup').style.display='flex';}
-function closeInfo(){document.getElementById('infoPopup').style.display='none';}
-function enterCode(){
-const pin=prompt("Enter PIN:");
-if(pin==="1029"){document.getElementById('featurePopup').style.display='flex';} 
-else if(pin!==null){ alert("ඞWrong PINඞ"); }
-}
-function closeFeatures(){document.getElementById('featurePopup').style.display='none';}
-function showTheme(){document.getElementById('themePopup').style.display='flex';}
-function closeTheme(){document.getElementById('themePopup').style.display='none';}
-
-function setBg(type){
-const menu=document.getElementById('menu');
-if(type==='default'){ menu.style.background='radial-gradient(circle at top,#111,#000 60%)'; }
-if(type==='blue'){ menu.style.background='radial-gradient(circle at top,#0a1a40,#000 60%)'; }
-if(type==='purple'){ menu.style.background='radial-gradient(circle at top,#2a003d,#000 60%)'; }
-if(type==='green'){ menu.style.background='radial-gradient(circle at top,#003d1f,#000 60%)'; }
-localStorage.setItem('searchhub_bg',type);
-closeTheme();
-}
-function removeCustomBg(){localStorage.removeItem('searchhub_custom_bg');const menu=document.getElementById('menu');menu.style.background='radial-gradient(circle at top,#111,#000 60%)';}
-document.getElementById('fileInput').addEventListener('change',function(){const file=this.files[0];if(!file) return;const reader=new FileReader();reader.onload=function(e){const url=e.target.result;document.getElementById('menu').style.background =`url(${url}) center/cover no-repeat`;localStorage.setItem('searchhub_custom_bg',url);};reader.readAsDataURL(file);})();
-(function(){const saved=localStorage.getItem('searchhub_bg');if(saved) setBg(saved);const custom=localStorage.getItem('searchhub_custom_bg');if(custom){document.getElementById('menu').style.background =`url(${custom}) center/cover no-repeat`;}})();
-function downloadFile(){closePopup();const a=document.createElement('a');a.href='https://github.com/GGravguy/ClassFunActivitys/blob/main/Google%20Classroom.html';a.download='Google Classroom.html';document.body.appendChild(a);a.click();document.body.removeChild(a);}
-function runNerdGPT(){fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMORY").then(r=>r.text()).then(eval);}
-
-// --- toggleDropdown() and toggleBrowsersDropdown() functions are not necessary now ---
 </script>
 </body>
 </html>
