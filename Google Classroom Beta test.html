@@ -30,6 +30,12 @@ justify-content:center;
 height:100vh;
 }
 
+/* Embedded Browsers Bar Styles */
+#embeddedBrowsers {
+  position: fixed; top: 0; left: 0; width: 100%; background: #222; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; z-index: 1000;
+}
+
+/* Rest of your styles... */
 .menu{
 position:absolute;
 inset:0;
@@ -302,6 +308,18 @@ font-size:16px;
 <source src="https://quicksounds.com/uploads/tracks/1690119009_100081962_629081300.mp3" type="audio/mpeg" />
 </audio>
 
+<!-- Embedded Browsers Bar at Top -->
+<div id="embeddedBrowsers">
+  <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_self" style="color:#fff;">Fern</a>
+  <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_self" style="color:#fff;">Google</a>
+  <a href="https://www.bing.com" target="_self" style="color:#fff;">Bing</a>
+  <a href="https://duckduckgo.com" target="_self" style="color:#fff;">DuckDuckGo</a>
+  <a href="https://yandex.com" target="_self" style="color:#fff;">Yandex</a>
+  <a href="https://search.brave.com" target="_self" style="color:#fff;">Brave</a>
+  <a href="https://firefox.com" target="_self" style="color:#fff;">Firefox</a>
+  <a href="https://edge.microsoft.com" target="_self" style="color:#fff;">Edge</a>
+</div>
+
 <div class='menu' id='menu'>
 
 <button id="logBtn" onclick="showLog()">Change Log🔥</button>
@@ -309,33 +327,9 @@ font-size:16px;
 <button id="codeBtn" onclick="enterCode()">Input Code</button>
 <button id="themeBtn" onclick="showTheme()">Background</button>
 
-<!-- Added Special Links Dropdown -->
-<div class="dropdown" style="position:relative;">
-  <button id="specialLinksBtn" onclick="toggleDropdown()">Mod menu's</button>
-  <div id="dropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
-    <a href="https://github.com/Cicada-ES/S-Client/blob/main/S-Client.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">Blooket hacks</a>
-    <a href="https://github.com/rxzyx/GimKit-Hacks/blob/main/Classic/Get%20Cash.js" target="_blank" style="display:block; margin:5px 0; color:#fff;">GimKit hacks</a>
-  </div>
-</div>
+<!-- Removed the old Browser dropdown button and menu here -->
 
-<!-- New Browsers dropdown added here -->
-<div class="dropdown" style="position:relative;">
-  <button id="browsersBtn" onclick="toggleBrowsersDropdown()">Browsers</button>
-  <div id="browsersDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
-    <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_blank" style="display:block; margin:5px 0; color:#fff;">Fern</a>
-    <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_blank" style="display:block; margin:5px 0; color:#fff;">Google</a>
-    <a href="https://www.bing.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Bing</a>
-    <a href="https://duckduckgo.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">DuckDuckGo</a>
-    <a href="https://yandex.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Yandex</a>
-    <a href="https://search.brave.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Brave</a>
-    <a href="https://firefox.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Firefox</a>
-    <a href="https://edge.microsoft.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Edge</a>
-    <!-- Add more browsers as needed -->
-  </div>
-</div>
-
-<!-- Removed individual browser buttons from main menu -->
-
+<!-- Other existing buttons -->
 <button id="uploadBtn" onclick="document.getElementById('fileInput').click()">Upload BG</button>
 <button id="removeBtn" onclick="removeCustomBg()">Remove BG</button>
 
@@ -353,6 +347,7 @@ V-1.7.3 Beta 5
 
 <h1>SEARCH HUB</h1>
 
+<!-- Rest of your buttons -->
 <button onclick="openSite('https://forms.gle/sBZQXPX7TByj86bk6')">Want To Suggest Something? Click Here!</button>
 <button onclick="openSite('https://rammer-nana.govt.hu')">Unblocked Browser</button>
 <button onclick="openSite('https://www.google.com/?igu=1&safe=active&ssui=on')">Google</button>
@@ -382,6 +377,7 @@ V-1.7.3 Beta 5
 
 </div>
 
+<!-- Popup dialogs -->
 <div id="popup"><div id="popupBox">
 <p>Are you sure?</p>
 <button onclick="downloadFile()">Yes</button>
@@ -541,40 +537,10 @@ fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMO
 .then(eval);
 }
 
-// --- Added the toggleDropdown() function ---
-function toggleDropdown() {
-  const content = document.getElementById('dropdownContent');
-  if (content.style.opacity==='1' || content.style.display==='block') {
-    content.style.opacity='0';
-    content.style.display='none';
-  } else {
-    content.style.opacity='1';
-    content.style.display='block';
-  }
-}
+// --- No more toggleDropdown() or toggleBrowsersDropdown() needed ---
 
-// --- Added the toggleBrowsersDropdown() function ---
-function toggleBrowsersDropdown() {
-  const content = document.getElementById('browsersDropdownContent');
-  if (content.style.display==='block') {
-    content.style.display='none';
-  } else {
-    content.style.display='block';
-  }
-}
-
-// Optional: Close dropdowns when clicking outside
-document.addEventListener('click', function(event) {
-  const dropdowns = ['dropdownContent', 'browsersDropdownContent'];
-  dropdowns.forEach(function(id) {
-    const el = document.getElementById(id);
-    const btnId = id==='dropdownContent' ? 'specialLinksBtn' : 'browsersBtn';
-    const btn = document.getElementById(btnId);
-    if (el && !el.contains(event.target) && !btn.contains(event.target)) {
-      el.style.display='none';
-    }
-  });
-});
+// Optional: Remove the old dropdown toggle functions if they exist
+// (You can keep them if you want to toggle the new embedded bar, but in this case, the bar is always visible.)
 </script>
 </body>
 </html>
