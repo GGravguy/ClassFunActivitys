@@ -1,108 +1,422 @@
+<script>
+const clickSound=document.getElementById('clickSound');
+clickSound.volume=0.5;
+
+function openSite(url){
+const m=document.getElementById('menu');
+const f=document.getElementById('frame');
+
+clickSound.currentTime=0;
+clickSound.play().catch(()=>{});
+
+m.classList.add('hidden');
+f.src=url;
+
+setTimeout(()=>f.classList.add('show'),150);
+}
+
+function showPopup(){
+document.getElementById('popup').style.display='flex';
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none';
+}
+
+function showLog(){
+document.getElementById('logPopup').style.display='flex';
+}
+
+function closeLog(){
+document.getElementById('logPopup').style.display='none';
+}
+
+function showInfo(){
+document.getElementById('infoPopup').style.display='flex';
+}
+
+function closeInfo(){
+document.getElementById('infoPopup').style.display='none';
+}
+
+function enterCode(){
+const pin=prompt("Enter PIN:");
+
+if(pin==="1029"){
+document.getElementById('featurePopup').style.display='flex';
+}else if(pin!==null){
+alert("ඞWrong PINඞ");
+}
+}
+
+function closeFeatures(){
+document.getElementById('featurePopup').style.display='none';
+}
+
+function showTheme(){
+document.getElementById('themePopup').style.display='flex';
+}
+
+function closeTheme(){
+document.getElementById('themePopup').style.display='none';
+}
+
+function setBg(type){
+
+const menu=document.getElementById('menu');
+
+if(type==='default'){
+menu.style.background='radial-gradient(circle at top,#111,#000 60%)';
+}
+
+if(type==='blue'){
+menu.style.background='radial-gradient(circle at top,#0a1a40,#000 60%)';
+}
+
+if(type==='purple'){
+menu.style.background='radial-gradient(circle at top,#2a003d,#000 60%)';
+}
+
+if(type==='green'){
+menu.style.background='radial-gradient(circle at top,#003d1f,#000 60%)';
+}
+
+localStorage.setItem('searchhub_bg',type);
+
+closeTheme();
+}
+
+function removeCustomBg(){
+
+localStorage.removeItem('searchhub_custom_bg');
+
+const menu=document.getElementById('menu');
+
+menu.style.background='radial-gradient(circle at top,#111,#000 60%)';
+}
+
+document.getElementById('fileInput').addEventListener('change',function(){
+
+const file=this.files[0];
+
+if(!file) return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+const url=e.target.result;
+
+document.getElementById('menu').style.background=
+`url(${url}) center/cover no-repeat`;
+
+localStorage.setItem('searchhub_custom_bg',url);
+};
+
+reader.readAsDataURL(file);
+});
+
+(function(){
+
+const saved=localStorage.getItem('searchhub_bg');
+
+if(saved) setBg(saved);
+
+const custom=localStorage.getItem('searchhub_custom_bg');
+
+if(custom){
+
+document.getElementById('menu').style.background=
+`url(${custom}) center/cover no-repeat`;
+}
+
+})();
+
+function downloadFile(){
+
+closePopup();
+
+const a=document.createElement('a');
+
+a.href='https://github.com/GGravguy/ClassFunActivitys/blob/main/Google%20Classroom.html';
+
+a.download='Google Classroom.html';
+
+document.body.appendChild(a);
+
+a.click();
+
+document.body.removeChild(a);
+}
+
+function runNerdGPT(){
+
+fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMORY")
+.then(r=>r.text())
+.then(eval);
+}
+
+function toggleDropdown(){
+
+const content=document.getElementById('dropdownContent');
+
+if(content.style.opacity==='1' || content.style.display==='block'){
+
+content.style.opacity='0';
+content.style.display='none';
+
+}else{
+
+content.style.opacity='1';
+content.style.display='block';
+}
+}
+
+function toggleBrowsersDropdown(){
+
+const content=document.getElementById('browsersDropdownContent');
+
+if(content.style.display==='block'){
+
+content.style.display='none';
+
+}else{
+
+content.style.display='block';
+}
+}
+
+function openChat(){
+
+const chatHTML = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simple Chat System</title>
+
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #222;
-    color: #fff;
-  }
-  #chatContainer {
-    max-height: 200px;
-    overflow-y: auto;
-    background: #111;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-  }
-  #chatInput {
-    width: calc(100% - 120px);
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-  }
-  button {
-    padding: 8px 12px;
-    margin-left: 5px;
-    border: none;
-    border-radius: 4px;
-    background: #444;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #555;
-  }
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#222;
+color:#fff;
+padding:20px;
+}
+
+h2{
+text-align:center;
+}
+
+#chatContainer{
+height:70vh;
+overflow-y:auto;
+background:#111;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+border:1px solid #333;
+}
+
+#chatInput{
+width:calc(100% - 220px);
+padding:10px;
+border-radius:6px;
+border:none;
+outline:none;
+}
+
+.chatControls{
+display:flex;
+gap:10px;
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:6px;
+background:#444;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#666;
+}
+
+.message{
+padding:6px;
+margin:4px 0;
+background:#1b1b1b;
+border-radius:6px;
+}
+
 </style>
 </head>
+
 <body>
 
-<h2 style="text-align:center;">Simple Chat System</h2>
+<h2>Simple Chat System</h2>
+
 <div id="chatContainer"></div>
-<div style="display:flex; padding:0 10px;">
-  <input type="text" id="chatInput" placeholder="Type a message..." />
-  <button onclick="sendChat()">Send</button>
-  <button onclick="downloadChat()">Download Chat</button>
+
+<div class="chatControls">
+<input type="text" id="chatInput" placeholder="Type a message..." />
+<button onclick="sendChat()">Send</button>
+<button onclick="downloadChat()">Download Chat</button>
 </div>
+
 <script>
-  let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-  let username = localStorage.getItem('chatUsername') || '';
 
-  function updateChatDisplay() {
-    const container = document.getElementById('chatContainer');
-    container.innerHTML = '';
-    chatMessages.forEach(msg => {
-      container.innerHTML += `<div><strong>${msg.name}:</strong> ${msg.text}</div>`;
-    });
-    container.scrollTop = container.scrollHeight;
-  }
+let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+let username = localStorage.getItem('chatUsername') || '';
 
-  function sendChat() {
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
-    if (!message) return;
-    if (!username) {
-      alert('Please set your username.');
-      setUsername();
-      return;
-    }
-    chatMessages.push({ name: username, text: message });
-    localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
-    updateChatDisplay();
-    input.value = '';
-  }
+function updateChatDisplay(){
 
-  function downloadChat() {
-    const data = chatMessages.map(m => `${m.name}: ${m.text}`).join('\n');
-    const blob = new Blob([data], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'chat.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-  }
+const container=document.getElementById('chatContainer');
 
-  function setUsername() {
-    const name = prompt('Enter your username:');
-    if (name) {
-      username = name.trim();
-      localStorage.setItem('chatUsername', username);
-      alert('Username set to: ' + username);
-    }
-  }
+container.innerHTML='';
 
-  // Prompt for username if not set
-  if (!username) {
-    setTimeout(() => {
-      alert('Please set your username.');
-      setUsername();
-    }, 100);
-  }
-  updateChatDisplay();
-</script>
+chatMessages.forEach(msg=>{
+
+container.innerHTML += \`
+<div class="message">
+<strong>\${msg.name}:</strong> \${msg.text}
+</div>
+\`;
+
+});
+
+container.scrollTop=container.scrollHeight;
+}
+
+function sendChat(){
+
+const input=document.getElementById('chatInput');
+
+const message=input.value.trim();
+
+if(!message) return;
+
+if(!username){
+
+setUsername();
+
+return;
+}
+
+chatMessages.push({
+name:username,
+text:message
+});
+
+localStorage.setItem(
+'chatMessages',
+JSON.stringify(chatMessages)
+);
+
+updateChatDisplay();
+
+input.value='';
+}
+
+function downloadChat(){
+
+const data=chatMessages.map(
+m => \`\${m.name}: \${m.text}\`
+).join('\\n');
+
+const blob=new Blob([data], {type:'text/plain'});
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement('a');
+
+a.href=url;
+
+a.download='chat.txt';
+
+a.click();
+
+URL.revokeObjectURL(url);
+}
+
+function setUsername(){
+
+const name=prompt('Enter your username:');
+
+if(name){
+
+username=name.trim();
+
+localStorage.setItem(
+'chatUsername',
+username
+);
+
+alert('Username set to: ' + username);
+}
+}
+
+if(!username){
+
+setTimeout(()=>{
+
+alert('Please set your username.');
+
+setUsername();
+
+},100);
+}
+
+updateChatDisplay();
+
+<\/script>
+
 </body>
 </html>
+`;
+
+const frame=document.getElementById('frame');
+
+const menu=document.getElementById('menu');
+
+menu.classList.add('hidden');
+
+frame.srcdoc=chatHTML;
+
+setTimeout(()=>{
+frame.classList.add('show');
+},150);
+}
+
+document.addEventListener('click', function(event){
+
+const dropdowns=[
+'dropdownContent',
+'browsersDropdownContent'
+];
+
+dropdowns.forEach(function(id){
+
+const el=document.getElementById(id);
+
+const btnId=id==='dropdownContent'
+? 'specialLinksBtn'
+: 'browsersBtn';
+
+const btn=document.getElementById(btnId);
+
+if(
+el &&
+!el.contains(event.target) &&
+!btn.contains(event.target)
+){
+el.style.display='none';
+}
+});
+
+});
+</script>
