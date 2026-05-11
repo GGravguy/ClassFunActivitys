@@ -318,19 +318,19 @@ font-size:16px;
   </div>
 </div>
 
-<!-- New Browsers dropdown with embedded iframe loading -->
+<!-- New Browsers dropdown added here -->
 <div class="dropdown" style="position:relative;">
   <button id="browsersBtn" onclick="toggleBrowsersDropdown()">Browsers</button>
-  <div id="browsersDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20; max-width:340px; overflow:auto;">
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D')">Fern</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://www.google.com/?igu=1&safe=active&ssui=on')">Google</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://www.bing.com')">Bing</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://duckduckgo.com')">DuckDuckGo</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://yandex.com')">Yandex</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://search.brave.com')">Brave</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://firefox.com')">Firefox</button>
-    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://edge.microsoft.com')">Edge</button>
-    <!-- Add more buttons as needed -->
+  <div id="browsersDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
+    <a href="#" onclick="openBrowser('https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D'); return false;" style="display:block; margin:5px 0; color:#fff;">Fern</a>
+    <a href="#" onclick="openBrowser('https://www.google.com/?igu=1&safe=active&ssui=on'); return false;" style="display:block; margin:5px 0; color:#fff;">Google</a>
+    <a href="#" onclick="openBrowser('https://www.bing.com'); return false;" style="display:block; margin:5px 0; color:#fff;">Bing</a>
+    <a href="#" onclick="openBrowser('https://duckduckgo.com'); return false;" style="display:block; margin:5px 0; color:#fff;">DuckDuckGo</a>
+    <a href="#" onclick="openBrowser('https://yandex.com'); return false;" style="display:block; margin:5px 0; color:#fff;">Yandex</a>
+    <a href="#" onclick="openBrowser('https://search.brave.com'); return false;" style="display:block; margin:5px 0; color:#fff;">Brave</a>
+    <a href="#" onclick="openBrowser('https://firefox.com'); return false;" style="display:block; margin:5px 0; color:#fff;">Firefox</a>
+    <a href="#" onclick="openBrowser('https://edge.microsoft.com'); return false;" style="display:block; margin:5px 0; color:#fff;">Edge</a>
+    <!-- Add more browsers as needed -->
   </div>
 </div>
 
@@ -380,7 +380,7 @@ V-1.7.3 Beta 5
 <button onclick="openSite('https://nb-ga.github.io/games-site/projects/retro-bowl/index.html')">Retro Bowl</button>
 <button onclick="openSite('https://s3.amazonaws.com/bullguardian/index.html')">Fern</button>
 
-<!-- add more buttons here -->
+<!-- add here to make more buttons -->
 
 </div>
 
@@ -565,12 +565,12 @@ function toggleBrowsersDropdown() {
   }
 }
 
-// Function to load URL into iframe
-function openInIframe(url) {
+// New function to load URL into iframe
+function openBrowser(url) {
   const iframe = document.getElementById('frame');
   iframe.src = url;
-  iframe.classList.add('show');
-  document.getElementById('menu').classList.add('hidden');
+  // Close dropdown after selection
+  document.getElementById('browsersDropdownContent').style.display='none';
 }
 
 // Optional: Close dropdowns when clicking outside
