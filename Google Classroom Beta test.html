@@ -1,38 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Simple Chat with Save and Download</title>
+<title>Chat with Login</title>
 </head>
 <body>
 <h2>Chat</h2>
+<div id="userDisplay" style="margin-bottom:10px;"></div>
 <div id="chatBox" style="border:1px solid #ccc; height:200px; overflow:auto; padding:5px;"></div>
 <input type="text" id="messageInput" placeholder="Type a message"/>
 <button onclick="sendMessage()">Send</button>
 <button onclick="downloadChat()">Download Chat</button>
+<button onclick="setUsername()">Set Username</button>
 
 <script>
 let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+let username = localStorage.getItem('username') || '';
 
 function displayMessages() {
   const chatBox = document.getElementById('chatBox');
   chatBox.innerHTML = '';
   chatHistory.forEach(msg => {
-    chatBox.innerHTML += `<div>${msg}</div>`;
+    chatBox.innerHTML += `<div><strong>${msg.name}:</strong> ${msg.text}</div>`;
   });
 }
 
+function updateUserDisplay() {
+  const userDiv = document.getElementById('userDisplay');
+  if (username) {
+    userDiv.innerHTML = `Logged in as: <strong>${username}</strong>`;
+  } else {
+    userDiv.innerHTML = 'Not logged in. Click "Set Username" to enter one.';
+  }
+}
+
 function sendMessage() {
+  if (!username) {
+    alert('Please set a username first.');
+    return;
+  }
   const input = document.getElementById('messageInput');
-  const message = input.value.trim();
-  if (!message) return;
-  chatHistory.push(message);
+  const text = input.value.trim();
+  if (!text) return;
+  chatHistory.push({name: username, text: text});
   localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
   displayMessages();
   input.value = '';
 }
 
+function setUsername() {
+  const name = prompt('Enter your username:');
+  if (name) {
+    username = name.trim();
+    localStorage.setItem('username', username);
+    updateUserDisplay();
+  }
+}
+
 function downloadChat() {
-  const data = chatHistory.join('\n');
+  const data = chatHistory.map(msg => `${msg.name}: ${msg.text}`).join('\n');
   const blob = new Blob([data], {type: 'text/plain'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -40,7 +65,11 @@ function downloadChat() {
   a.download = 'chat.txt';
   a.click();
 }
+
+// Initialize display
+updateUserDisplay();
 displayMessages();
+
 </script>
 </body>
 </html>
