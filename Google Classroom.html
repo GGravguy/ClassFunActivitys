@@ -318,19 +318,19 @@ font-size:16px;
   </div>
 </div>
 
-<!-- New Browsers dropdown added here -->
+<!-- New Browsers dropdown with embedded iframe loading -->
 <div class="dropdown" style="position:relative;">
   <button id="browsersBtn" onclick="toggleBrowsersDropdown()">Browsers</button>
   <div id="browsersDropdownContent" style="display:none; position:absolute; top:50px; left:0; background:#222; padding:10px; border-radius:8px; z-index:20;">
-    <a href="https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D" target="_blank" style="display:block; margin:5px 0; color:#fff;">Fern</a>
-    <a href="https://www.google.com/?igu=1&safe=active&ssui=on" target="_blank" style="display:block; margin:5px 0; color:#fff;">Google</a>
-    <a href="https://www.bing.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Bing</a>
-    <a href="https://duckduckgo.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">DuckDuckGo</a>
-    <a href="https://yandex.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Yandex</a>
-    <a href="https://search.brave.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Brave</a>
-    <a href="https://firefox.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Firefox</a>
-    <a href="https://edge.microsoft.com" target="_blank" style="display:block; margin:5px 0; color:#fff;">Edge</a>
-    <!-- Add more browsers as needed -->
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://s3.amazonaws.com/bullguardian/index.html?route=%2Fsearch%3Fquery%3DaHR0cHM6Ly93d3cudGlrdG9rLmNvbQ%253D%253D')">Fern</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://www.google.com/?igu=1&safe=active&ssui=on')">Google</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://www.bing.com')">Bing</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://duckduckgo.com')">DuckDuckGo</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://yandex.com')">Yandex</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://search.brave.com')">Brave</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://firefox.com')">Firefox</button>
+    <button style="display:block; margin:5px 0; color:#fff;" onclick="openInIframe('https://edge.microsoft.com')">Edge</button>
+    <!-- Add more buttons as needed -->
   </div>
 </div>
 
@@ -555,14 +555,13 @@ function toggleDropdown() {
   }
 }
 
-// --- Added the toggleBrowsersDropdown() function ---
-function toggleBrowsersDropdown() {
-  const content = document.getElementById('browsersDropdownContent');
-  if (content.style.display==='block') {
-    content.style.display='none';
-  } else {
-    content.style.display='block';
-  }
+function openInIframe(url) {
+  const iframe = document.getElementById('frame');
+  iframe.src = url;
+  // Show the iframe if it's hidden
+  iframe.classList.add('show');
+  // Optionally, hide the menu if you want
+  document.getElementById('menu').classList.add('hidden');
 }
 
 // Optional: Close dropdowns when clicking outside
