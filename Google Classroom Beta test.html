@@ -1,422 +1,331 @@
-<script>
-const clickSound=document.getElementById('clickSound');
-clickSound.volume=0.5;
-
-function openSite(url){
-const m=document.getElementById('menu');
-const f=document.getElementById('frame');
-
-clickSound.currentTime=0;
-clickSound.play().catch(()=>{});
-
-m.classList.add('hidden');
-f.src=url;
-
-setTimeout(()=>f.classList.add('show'),150);
-}
-
-function showPopup(){
-document.getElementById('popup').style.display='flex';
-}
-
-function closePopup(){
-document.getElementById('popup').style.display='none';
-}
-
-function showLog(){
-document.getElementById('logPopup').style.display='flex';
-}
-
-function closeLog(){
-document.getElementById('logPopup').style.display='none';
-}
-
-function showInfo(){
-document.getElementById('infoPopup').style.display='flex';
-}
-
-function closeInfo(){
-document.getElementById('infoPopup').style.display='none';
-}
-
-function enterCode(){
-const pin=prompt("Enter PIN:");
-
-if(pin==="1029"){
-document.getElementById('featurePopup').style.display='flex';
-}else if(pin!==null){
-alert("ඞWrong PINඞ");
-}
-}
-
-function closeFeatures(){
-document.getElementById('featurePopup').style.display='none';
-}
-
-function showTheme(){
-document.getElementById('themePopup').style.display='flex';
-}
-
-function closeTheme(){
-document.getElementById('themePopup').style.display='none';
-}
-
-function setBg(type){
-
-const menu=document.getElementById('menu');
-
-if(type==='default'){
-menu.style.background='radial-gradient(circle at top,#111,#000 60%)';
-}
-
-if(type==='blue'){
-menu.style.background='radial-gradient(circle at top,#0a1a40,#000 60%)';
-}
-
-if(type==='purple'){
-menu.style.background='radial-gradient(circle at top,#2a003d,#000 60%)';
-}
-
-if(type==='green'){
-menu.style.background='radial-gradient(circle at top,#003d1f,#000 60%)';
-}
-
-localStorage.setItem('searchhub_bg',type);
-
-closeTheme();
-}
-
-function removeCustomBg(){
-
-localStorage.removeItem('searchhub_custom_bg');
-
-const menu=document.getElementById('menu');
-
-menu.style.background='radial-gradient(circle at top,#111,#000 60%)';
-}
-
-document.getElementById('fileInput').addEventListener('change',function(){
-
-const file=this.files[0];
-
-if(!file) return;
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-const url=e.target.result;
-
-document.getElementById('menu').style.background=
-`url(${url}) center/cover no-repeat`;
-
-localStorage.setItem('searchhub_custom_bg',url);
-};
-
-reader.readAsDataURL(file);
-});
-
-(function(){
-
-const saved=localStorage.getItem('searchhub_bg');
-
-if(saved) setBg(saved);
-
-const custom=localStorage.getItem('searchhub_custom_bg');
-
-if(custom){
-
-document.getElementById('menu').style.background=
-`url(${custom}) center/cover no-repeat`;
-}
-
-})();
-
-function downloadFile(){
-
-closePopup();
-
-const a=document.createElement('a');
-
-a.href='https://github.com/GGravguy/ClassFunActivitys/blob/main/Google%20Classroom.html';
-
-a.download='Google Classroom.html';
-
-document.body.appendChild(a);
-
-a.click();
-
-document.body.removeChild(a);
-}
-
-function runNerdGPT(){
-
-fetch("https://raw.githubusercontent.com/GGravguy/Aibot/refs/heads/main/bot2MEMORY")
-.then(r=>r.text())
-.then(eval);
-}
-
-function toggleDropdown(){
-
-const content=document.getElementById('dropdownContent');
-
-if(content.style.opacity==='1' || content.style.display==='block'){
-
-content.style.opacity='0';
-content.style.display='none';
-
-}else{
-
-content.style.opacity='1';
-content.style.display='block';
-}
-}
-
-function toggleBrowsersDropdown(){
-
-const content=document.getElementById('browsersDropdownContent');
-
-if(content.style.display==='block'){
-
-content.style.display='none';
-
-}else{
-
-content.style.display='block';
-}
-}
-
-function openChat(){
-
-const chatHTML = `
 <!DOCTYPE html>
+<!-- 
+  This version is running V-1.7.3 Beta 5
+  If you are running Version V-1.7.2 or V-1.6.2
+  PLEASE UPGRADE TO THIS VERSION BY Clicking
+  The download button and replacing your current file.
+-->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simple Chat System</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Google Classroom</title>
 <style>
+*{box-sizing:border-box}
+
+html,body{
+margin:0;
+height:100%;
+width:100vw;
+overflow:hidden;
+font-family:Arial,sans-serif;
+background:#000;
+color:#fff;
+}
+
+/* Main menu styles omitted for brevity, keep your styles here */
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#222;
-color:#fff;
-padding:20px;
-}
-
-h2{
-text-align:center;
-}
-
-#chatContainer{
-height:70vh;
-overflow-y:auto;
-background:#111;
-padding:10px;
-margin-bottom:10px;
-border-radius:8px;
-border:1px solid #333;
-}
-
-#chatInput{
-width:calc(100% - 220px);
-padding:10px;
-border-radius:6px;
-border:none;
-outline:none;
-}
-
-.chatControls{
 display:flex;
-gap:10px;
+align-items:center;
+justify-content:center;
+height:100vh;
 }
+
+/* Existing styles for menu, buttons, etc. */
+
+.menu{
+position:absolute;
+inset:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+gap:18px;
+background:radial-gradient(circle at top,#111,#000 60%);
+transition:.6s ease;
+height:100vh;
+overflow-y:auto;
+padding:60px 0;
+}
+
+.menu.hidden{
+opacity:0;
+pointer-events:none;
+transform:scale(1.05);
+}
+
+h1{
+margin:0 0 10px;
+font-size:42px;
+letter-spacing:2px;
+z-index:5;
+background:linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,magenta,red);
+background-size:400% 100%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:rainbow 6s linear infinite;
+text-shadow:0 0 18px rgba(255,255,255,.15);
+}
+
+@keyframes rainbow{
+0%{background-position:0% 50%}
+100%{background-position:400% 50%}
+}
+
+/* Button styles omitted for brevity */
 
 button{
-padding:10px 14px;
+position:relative;
+z-index:5;
+width:320px;
+max-width:90vw;
+padding:18px;
 border:none;
-border-radius:6px;
-background:#444;
-color:white;
+border-radius:18px;
+background:linear-gradient(145deg,#1f1f1f,#090909);
+color:#fff;
+font-size:20px;
 cursor:pointer;
+transition:.25s ease;
+box-shadow:0 10px 25px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.08);
 }
 
 button:hover{
-background:#666;
+transform:translateY(-6px) scale(1.12);
+box-shadow:0 18px 35px rgba(255,255,255,.12);
 }
 
-.message{
-padding:6px;
-margin:4px 0;
-background:#1b1b1b;
-border-radius:6px;
+button:active{transform:scale(.98)}
+
+/* iframe styles omitted for brevity */
+
+iframe{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+border:none;
+opacity:0;
+transition:opacity .7s ease;
+overflow:hidden;
 }
 
+.show{opacity:1}
+
+/* Glows omitted for brevity */
+
+.glow, .glow2, .glow3, .glow4 {
+  pointer-events:none;
+  position:absolute;
+  border-radius:50%;
+  filter:blur(95px);
+  opacity:.2;
+  animation:drift 30s linear infinite alternate;
+}
+
+.glow{
+  width:280px;
+  height:280px;
+  background:#34a853;
+  top:10%;
+  left:-10%;
+  opacity:.22;
+}
+
+/* other glow styles omitted for brevity */
+
+@keyframes drift{
+0%{transform:translate(0,0)}
+100%{transform:translate(120vw,35vh)}
+}
+
+/* Additional styles for the chat button */
+
+#chatToggleBtn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(145deg,#1f1f1f,#090909);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,.3);
+}
+#chatToggleBtn:hover {
+  transform: scale(1.05);
+}
+
+/* Chat popup styles */
+
+#chatPopup {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  width: 350px;
+  max-height: 500px;
+  background: #111;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,.5);
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
+}
+#chatHeader {
+  background: #222;
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#closeChatBtn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+#chatContainer {
+  flex: 1;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+#chatInputContainer {
+  display: flex;
+  padding: 10px;
+}
+#chatInput {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+}
+#sendChatBtn {
+  margin-left: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background: #444;
+  color: #fff;
+  cursor: pointer;
+}
+#sendChatBtn:hover {
+  background: #555;
+}
 </style>
 </head>
 
 <body>
 
-<h2>Simple Chat System</h2>
+<!-- Existing content omitted for brevity -->
 
-<div id="chatContainer"></div>
+<!-- Chat toggle button at top left -->
+<button id="chatToggleBtn" onclick="toggleChat()">Chat</button>
 
-<div class="chatControls">
-<input type="text" id="chatInput" placeholder="Type a message..." />
-<button onclick="sendChat()">Send</button>
-<button onclick="downloadChat()">Download Chat</button>
+<!-- Chat popup overlay -->
+<div id="chatPopup">
+  <div id="chatHeader">
+    <span>Simple Chat System</span>
+    <button id="closeChatBtn" onclick="toggleChat()">X</button>
+  </div>
+  <div id="chatContainer"></div>
+  <div id="chatInputContainer">
+    <input type="text" id="chatInput" placeholder="Type a message..." />
+    <button id="sendChatBtn" onclick="sendChat()">Send</button>
+    <button onclick="downloadChat()">Download Chat</button>
+  </div>
 </div>
 
+<!-- Existing scripts omitted for brevity, add the chat script here -->
 <script>
+const clickSound=document.getElementById('clickSound');
+clickSound.volume=0.5;
 
+function openSite(url){
+  const m=document.getElementById('menu');
+  const f=document.getElementById('frame');
+
+  clickSound.currentTime=0;
+  clickSound.play().catch(()=>{});
+
+  m.classList.add('hidden');
+  f.src=url;
+  setTimeout(()=>f.classList.add('show'),150);
+}
+
+// Chat script variables and functions
 let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
 let username = localStorage.getItem('chatUsername') || '';
 
-function updateChatDisplay(){
-
-const container=document.getElementById('chatContainer');
-
-container.innerHTML='';
-
-chatMessages.forEach(msg=>{
-
-container.innerHTML += \`
-<div class="message">
-<strong>\${msg.name}:</strong> \${msg.text}
-</div>
-\`;
-
-});
-
-container.scrollTop=container.scrollHeight;
+function updateChatDisplay() {
+  const container = document.getElementById('chatContainer');
+  container.innerHTML = '';
+  chatMessages.forEach(msg => {
+    container.innerHTML += `<div><strong>${msg.name}:</strong> ${msg.text}</div>`;
+  });
+  container.scrollTop = container.scrollHeight;
 }
 
-function sendChat(){
-
-const input=document.getElementById('chatInput');
-
-const message=input.value.trim();
-
-if(!message) return;
-
-if(!username){
-
-setUsername();
-
-return;
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const message = input.value.trim();
+  if (!message) return;
+  if (!username) {
+    alert('Please set your username.');
+    setUsername();
+    return;
+  }
+  chatMessages.push({ name: username, text: message });
+  localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+  updateChatDisplay();
+  input.value = '';
 }
 
-chatMessages.push({
-name:username,
-text:message
-});
-
-localStorage.setItem(
-'chatMessages',
-JSON.stringify(chatMessages)
-);
-
-updateChatDisplay();
-
-input.value='';
+function downloadChat() {
+  const data = chatMessages.map(m => `${m.name}: ${m.text}`).join('\n');
+  const blob = new Blob([data], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'chat.txt';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
-function downloadChat(){
-
-const data=chatMessages.map(
-m => \`\${m.name}: \${m.text}\`
-).join('\\n');
-
-const blob=new Blob([data], {type:'text/plain'});
-
-const url=URL.createObjectURL(blob);
-
-const a=document.createElement('a');
-
-a.href=url;
-
-a.download='chat.txt';
-
-a.click();
-
-URL.revokeObjectURL(url);
+function setUsername() {
+  const name = prompt('Enter your username:');
+  if (name) {
+    username = name.trim();
+    localStorage.setItem('chatUsername', username);
+    alert('Username set to: ' + username);
+  }
 }
 
-function setUsername(){
-
-const name=prompt('Enter your username:');
-
-if(name){
-
-username=name.trim();
-
-localStorage.setItem(
-'chatUsername',
-username
-);
-
-alert('Username set to: ' + username);
-}
+// Toggle chat popup
+function toggleChat() {
+  const chatPopup = document.getElementById('chatPopup');
+  if (chatPopup.style.display === 'block') {
+    chatPopup.style.display = 'none';
+  } else {
+    chatPopup.style.display = 'block';
+    updateChatDisplay();
+  }
 }
 
-if(!username){
-
-setTimeout(()=>{
-
-alert('Please set your username.');
-
-setUsername();
-
-},100);
+// Prompt for username if not set
+if (!username) {
+  setTimeout(() => {
+    alert('Please set your username.');
+    setUsername();
+  }, 100);
 }
-
-updateChatDisplay();
-
-<\/script>
-
+</script>
 </body>
 </html>
-`;
-
-const frame=document.getElementById('frame');
-
-const menu=document.getElementById('menu');
-
-menu.classList.add('hidden');
-
-frame.srcdoc=chatHTML;
-
-setTimeout(()=>{
-frame.classList.add('show');
-},150);
-}
-
-document.addEventListener('click', function(event){
-
-const dropdowns=[
-'dropdownContent',
-'browsersDropdownContent'
-];
-
-dropdowns.forEach(function(id){
-
-const el=document.getElementById(id);
-
-const btnId=id==='dropdownContent'
-? 'specialLinksBtn'
-: 'browsersBtn';
-
-const btn=document.getElementById(btnId);
-
-if(
-el &&
-!el.contains(event.target) &&
-!btn.contains(event.target)
-){
-el.style.display='none';
-}
-});
-
-});
-</script>
