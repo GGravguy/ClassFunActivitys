@@ -1,4 +1,4 @@
-Search hub: made by Logan and river
+Activities: made by Logan and river
 
 current version is V-1.7.2 beta 
 
