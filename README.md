@@ -1,4 +1,4 @@
-Activities: Made by Logan
+Activities: Made by ME hehe
 
 current version is V-1.7.2 beta 
 
